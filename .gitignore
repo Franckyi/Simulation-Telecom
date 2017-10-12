@@ -1,3 +1,7 @@
+# Fichier .gitignore :
+# Tous les fichiers qui correspondent à une des entrées du fichier seront ignorés et ne seront jamais commit.
+# Le fichier a été généré automatiquement par GitHub, et est adapté pour un projet en Python
+#
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
