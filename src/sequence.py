@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
-import numpy
+import numpy.random as random
 
 
-class Sequence(object):
+class Sequence:
 
     def __init__(self, bits=None, nb_bits=8, debit=1000):
         """
@@ -28,7 +28,7 @@ def generer_aleatoire(n):
     :param n: Le nombre de bits
     :return: La liste aléatoire
     """
-    return numpy.random.randint(2, size=(n,)).tolist()
+    return random.randint(2, size=(n,)).tolist()
 
 
 def transformer_chaine(chaine):
