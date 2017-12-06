@@ -8,14 +8,14 @@ fech = 250.  # fréquence d'échantillonage en Hertz
 
 # paramètres séquence
 seq = [1, 0, 0, 1, 0, 1, 1, 0]  # séquence binaire
-debit = 2.  # débit binaire en Hertz
+debit = 2.  # débit binaire en Bit/s
 
 # paramètres codage (NRZ)
 v0_c = 0.  # tension associée à un bit égal à 0 en Volts
 v1_c = 1.  # tension associée à un bit égal à 1 en Volts
 
 # paramètres modulation (ASK-2)
-fp = 50.  # fréquence de la porteuse en Hz
+fp = 5.  # fréquence de la porteuse en Hz
 v0_m = 1.  # tension associée à un bit égal à 0 en Volts
 v1_m = 2.  # tension associée à un bit égal à 1 en Volts
 
@@ -32,7 +32,7 @@ for j in range(len(x)):  # pour chaque échantillon
 y1 = []  # contient les tensions correspondant au signal échantilloné modulé ASK-2
 i = 0  # on commence au bit 0
 for k in range(len(x)):  # pour chaque échantillon
-    y1.append(np.sin(2*np.pi*fp + x[k]*fp) * (v0_m if seq[i] == 0 else v1_m))  # on ajoute la tension correspondant au bit actuel
+    y1.append(np.sin(2*np.pi*fp*x[k]) * (v0_m if seq[i] == 0 else v1_m))  # on ajoute la tension correspondant au bit actuel
     if k >= fech/debit*(i+1):  # test pour changer de bit
         i += 1  # on passe au bit suivant
 
