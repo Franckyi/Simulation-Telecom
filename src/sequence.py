@@ -4,6 +4,9 @@ import numpy.random as random
 
 
 class Sequence:
+    """
+    Contient les informations à propos de la séquence (attribut 'bits') et de son débit binaire (attribut 'debit').
+    """
 
     def __init__(self, bits=None, nb_bits=8, debit=1000):
         """
