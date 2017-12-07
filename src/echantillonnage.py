@@ -12,7 +12,7 @@ class Echantillonnage:
     def __init__(self, vec, fech):
         """
         Construit un object échantillonnage
-        :param ech: Le vecteur temporel qui contient le temps associé à chaque échantillon
+        :param vec: Le vecteur temporel qui contient le temps associé à chaque échantillon
         :param fech: La fréquence d'échantillonnage
         """
         self.vec = vec

@@ -24,6 +24,12 @@ class Sequence:
                 self.bits = verifier_liste(bits)
         self.debit = debit
 
+    def __str__(self):
+        chaine = ""
+        for bit in self.bits:
+            chaine += str(bit)
+        return chaine
+
 
 def generer_aleatoire(n):
     """
