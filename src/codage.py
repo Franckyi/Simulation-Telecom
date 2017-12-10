@@ -61,6 +61,24 @@ def coder_2B1Q(sequence, echantillonnage, v):
     #  conseils :
     #  - lire https://en.wikipedia.org/wiki/2B1Q et https://en.wikipedia.org/wiki/Gray_code
     #  - calculer les tensions pour chaque dibit, en sachant que vmax = v et vmin = -v, et que chaque dibit est séparé
-    #    par une même tension (par exemple [0.45, 0.15, -0.15, -0.45] si v = 0.45, les dibits sont séparés de (2*v)/3 = 0.3)
+    #    par une même tension (par exemple [0.45, 0.15, -0.15, -0.45] si v = 0.45,
+    #    les dibits sont séparés de (2*v)/3 = 0.3)
     #  - prendre les bits deux par deux, et tester si ils valent 00, 01, 10 ou 11
+    y = []  # contient les tensions correspondant au signal échantilloné codé 2B1Q
+    i = 0  # on commence au bit 0
+    for j in range(len(echantillonnage.vec)):  # pour chaque échantillon
+        # On attribue la valeur correspondante de v à chaque dibit
+        if sequence.bits[i] == 0 and sequence.bits[i+1] == 0:  # Dibit 00
+            y.append(-v)
+        elif sequence.bits[i] == 0 and sequence.bits[i + 1] == 1:  # Dibit 01
+            y.append(-v+(2.*v/3))
+        elif sequence.bits[i] == 1 and sequence.bits[i + 1] == 0:  # Dibit 10
+            y.append(v-(2.*v/3))
+        elif sequence.bits[i] == 1 and sequence.bits[i + 1] == 1:  # Dibit 11
+            y.append(v)
+        if j >= echantillonnage.fech / sequence.debit * (i + 2):  # test pour changer de bit
+            i += 2  # on passe aux deux bits suivant
+    return y
+
+
     pass
