@@ -40,7 +40,7 @@ def coder_NRZ(sequence, echantillonnage, v0=0, v1=1):
 
 
 def coder_RZ(sequence, echantillonnage, v):
-    y = []  # contient les tensions correspondant au signal échantilloné codé NRZ
+    y = []  # contient les tensions correspondant au signal échantilloné codé RZ
     i = 0  # on commence au bit 0
     for j in range(len(echantillonnage.vec)):  # pour chaque échantillon
         if sequence.bits[i] == 0:  # si le bit vaut 0,
@@ -54,7 +54,18 @@ def coder_RZ(sequence, echantillonnage, v):
 
 def coder_manchester(sequence, echantillonnage, v0, v1):
     #  conseil : adapter le travail fait sur coder_RZ
-    pass
+    y = []  # contient les tensions correspondant au signal échantilloné codé manchester
+    i = 0  # on commence au bit 0
+    for j in range(len(echantillonnage.vec)):  # pour chaque échantillon
+        if sequence.bits[i] == 0:  # si le bit vaut 0,
+            y.append(v0 if j < echantillonnage.fech / sequence.debit * (i + 0.5) else v1)  # représente un front montant à la moitié de la durée du bit
+        else:  # si le bit vaut 1,
+            y.append(v1 if j < echantillonnage.fech / sequence.debit * (i + 0.5) else v0) #représente un front déscendant à la moitié de la durée du bit
+
+        if j >= echantillonnage.fech / sequence.debit * (i + 1):  # test pour changer de bit
+            i += 1  # on passe au bit suivant
+    return y
+
 
 
 def coder_2B1Q(sequence, echantillonnage, v):
@@ -79,6 +90,3 @@ def coder_2B1Q(sequence, echantillonnage, v):
         if j >= echantillonnage.fech / sequence.debit * (i + 2):  # test pour changer de bit
             i += 2  # on passe aux deux bits suivant
     return y
-
-
-    pass
