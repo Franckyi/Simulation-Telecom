@@ -93,6 +93,7 @@ def sequence_pseudo_aleatoire(n, m, debit):
     :return: La séquence
     """
     bits = []
+    bn = liste_aleatoire(n)
     for i in range(m):
-        bits.extend(liste_aleatoire(n))
+        bits.extend(bn)
     return Sequence(bits, debit)
