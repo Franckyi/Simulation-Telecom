@@ -8,20 +8,14 @@ class Sequence:
     Contient les informations à propos de la séquence (attribut 'bits') et de son débit binaire (attribut 'debit').
     """
 
-    def __init__(self, bits=None, nb_bits=8, debit=1000):
+    def __init__(self, bits, debit):
         """
         Construit un objet séquence
-        :param bits: Une chaîne de caractères ou une liste de nombres, ne pas remplir pour générer un signal aléatoire
-        :param nb_bits: Le nombre de bits du signal aléatoire (8 par défaut), ignoré si vous avez déjà rempli bits
-        :param debit: Le débit binaire de la séquence en bit/s (1000 par défaut)
+
+        :param bits: Une liste de nombres ; si elle contient un nombre autre que 0 ou 1, une Exception est levée
+        :param debit: Le débit binaire de la séquence (en bit/s)
         """
-        if bits is None:
-            self.bits = generer_aleatoire(nb_bits)
-        else:
-            if isinstance(bits, str):
-                self.bits = verifier_liste(transformer_chaine(bits))
-            elif isinstance(bits, list):
-                self.bits = verifier_liste(bits)
+        self.bits = verifier_liste(bits)
         self.debit = debit
 
     def __str__(self):
@@ -31,9 +25,10 @@ class Sequence:
         return chaine
 
 
-def generer_aleatoire(n):
+def liste_aleatoire(n):
     """
     Génère une liste aléatoire de n bits
+
     :param n: Le nombre de bits
     :return: La liste aléatoire
     """
@@ -43,6 +38,7 @@ def generer_aleatoire(n):
 def transformer_chaine(chaine):
     """
     Transforme une chaîne de caractères en une liste de nombres entiers
+
     :param chaine: La chaîne de caractères
     :return: La liste de nombres entiers
     """
@@ -55,6 +51,7 @@ def transformer_chaine(chaine):
 def verifier_liste(liste):
     """
     Vérifie si la liste de nombres entiers ne contient que des 0 et des 1
+
     :param liste:  La liste de nombres entiers
     :return: La liste de nombre entiers
     """
@@ -62,3 +59,40 @@ def verifier_liste(liste):
         if nombre not in [0, 1]:
             raise Exception("La liste contient un caractère autre que 0 ou 1.")
     return liste
+
+
+def sequence_chaine(chaine, debit=1000):
+    """
+    Créé une séquence à partir d'une chaîne de caractères
+
+    :param chaine: La chaîne de caractères
+    :param debit: Le débit binaire de la séquence
+    :return: La séquence
+    """
+    return Sequence(transformer_chaine(chaine), debit)
+
+
+def sequence_aleatoire(nb_bits=8, debit=1000):
+    """
+    Créé une séquence aléatoire
+
+    :param nb_bits: La taille de la séquence
+    :param debit: Le débit binaire de la séquence
+    :return: La séquence
+    """
+    return Sequence(liste_aleatoire(nb_bits), debit)
+
+
+def sequence_pseudo_aleatoire(n, m, debit):
+    """
+    Créé une séquence pseudo aléatoire
+
+    :param n: La taille de la sous-séquence
+    :param m: Le nombre de fois que la sous-séquence est répétée
+    :param debit: Le débit binaire de la séquence
+    :return: La séquence
+    """
+    bits = []
+    for i in range(m):
+        bits.extend(liste_aleatoire(n))
+    return Sequence(bits, debit)
