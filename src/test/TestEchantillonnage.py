@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 # paramètres généraux
 fech = 250.  # fréquence d'échantillonage en Hertz
@@ -40,6 +40,6 @@ p0, = plt.plot(x, y0)
 p1, = plt.plot(x, y1)
 plt.title(u"Signal échantillonné codé NRZ et modulé ASK-2")  # titre du graphique
 plt.legend([p0, p1], ["NRZ", "ASK-2"])  # legende du graphique
-plt.xlabel(u"Temps (s)")
+plt.xlabel("Temps (s)")
 plt.ylabel("Tension (V)")
 plt.show()

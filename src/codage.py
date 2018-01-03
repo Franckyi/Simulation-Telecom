@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-import numpy as np
 
 
 NRZ = 0
@@ -20,16 +19,16 @@ def coder(sequence, echantillonnage, codage, v0=0, v1=1):
     :return: La séquence échantillonnée codée
     """
     if codage == NRZ:
-        return coder_NRZ(sequence, echantillonnage, v0, v1)
+        return coder_nrz(sequence, echantillonnage, v0, v1)
     if codage == RZ:
-        return coder_RZ(sequence, echantillonnage, v1)
+        return coder_rz(sequence, echantillonnage, v1)
     if codage == MANCHESTER:
         return coder_manchester(sequence, echantillonnage, v0, v1)
     if codage == _2B1Q:
-        return coder_2B1Q(sequence, echantillonnage, v1)
+        return coder_2b1q(sequence, echantillonnage, v1)
 
 
-def coder_NRZ(sequence, echantillonnage, v0=0, v1=1):
+def coder_nrz(sequence, echantillonnage, v0=0, v1=1):
     y = []  # contient les tensions correspondant au signal échantilloné codé NRZ
     i = 0  # on commence au bit 0
     for j in range(len(echantillonnage.vec)):  # pour chaque échantillon
@@ -39,7 +38,7 @@ def coder_NRZ(sequence, echantillonnage, v0=0, v1=1):
     return y
 
 
-def coder_RZ(sequence, echantillonnage, v):
+def coder_rz(sequence, echantillonnage, v):
     y = []  # contient les tensions correspondant au signal échantilloné codé RZ
     i = 0  # on commence au bit 0
     for j in range(len(echantillonnage.vec)):  # pour chaque échantillon
@@ -67,8 +66,7 @@ def coder_manchester(sequence, echantillonnage, v0, v1):
     return y
 
 
-
-def coder_2B1Q(sequence, echantillonnage, v):
+def coder_2b1q(sequence, echantillonnage, v):
     #  conseils :
     #  - lire https://en.wikipedia.org/wiki/2B1Q et https://en.wikipedia.org/wiki/Gray_code
     #  - calculer les tensions pour chaque dibit, en sachant que vmax = v et vmin = -v, et que chaque dibit est séparé

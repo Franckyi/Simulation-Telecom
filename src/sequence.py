@@ -69,7 +69,7 @@ def sequence_chaine(chaine, debit=1000):
     :param debit: Le débit binaire de la séquence
     :return: La séquence
     """
-    return Sequence(transformer_chaine(chaine), debit)
+    return Sequence(verifier_liste(transformer_chaine(chaine)), debit)
 
 
 def sequence_aleatoire(nb_bits=8, debit=1000):
