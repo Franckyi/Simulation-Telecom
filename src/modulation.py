@@ -59,8 +59,16 @@ def moduler_fsk(sequence, *args):
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en fréquence
     """
     ech = echantillonnage.creer_echantillons(sequence, max(args) * 10)  # on échantillonne à 10 * fmax
-    pass
-
+    bits_symbole = verifier_parametres(args)  # on vérifie les paramètres et on récupère le nombre de bits par symbole
+    y = []
+    i = 0
+    for j in range (len(ech.vec)): # pour chaque echantillon
+        frequence = args [
+            binaire_vers_decimal(sequence.bits[i:i + bits_symbole])] # on récupère la fréquence correspondant au symbole
+        y.append(np.sin(2 * np.pi * ech.vec[j] * frequence))# on l'ajoute
+        if j >= ech.fech / sequence.debit * (i + bits_symbole):  # test pour changer de symbole
+            i += bits_symbole  # on passe au symbole suivant
+    return ech.vec, y
 
 def moduler_psk(sequence, fp, *args):
     """
@@ -70,7 +78,7 @@ def moduler_psk(sequence, fp, *args):
     :param args: Les différentes phases
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en phase
     """
-    ech = echantillonnage.creer_echantillons(sequence, fp * 100)  # on échantillonne à 10 * fp
+    ech = echantillonnage.creer_echantillons(sequence, fp * 100)  # on échantillonne à 100 * fp
     bits_symbole = verifier_parametres(args)  # on vérifie les paramètres et on récupère le nombre de bits par symbole
     y = []
     i = 0
