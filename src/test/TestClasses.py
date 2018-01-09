@@ -18,7 +18,7 @@ while type_codage not in range(4):
     print("3) 2B1Q")
     type_codage = input()
 
-sequence = sequence.sequence_aleatoire(9, 2.)
+sequence = sequence.sequence_aleatoire(15, 2.)
 print("Séquence aléatoire : " + sequence.__str__())  # affichage de la séquence
 ech = echantillonnage.creer_echantillons(sequence, 200.)  # création de l'échantillonnage à 200 Hz
 y = codage.coder(sequence, ech, type_codage)  # codage de la séquence avec échantillonnage

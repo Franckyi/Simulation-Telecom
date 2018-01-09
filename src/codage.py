@@ -8,6 +8,18 @@ MANCHESTER = 2
 _2B1Q = 3
 
 
+def binaire_vers_decimal(bits):
+    """
+    Transforme un tableau de bits en entier
+    :param bits: Le tableau de bits
+    :return: L'entier représentant la valeur binaire
+    """
+    s = ""
+    for bit in bits:
+        s += str(bit)
+    return int(s, 2)
+
+
 def coder(sequence, echantillonnage, codage, v0=0, v1=1):
     """
     Code une séquence avec échantillonnage au format choisi
@@ -59,7 +71,8 @@ def coder_manchester(sequence, echantillonnage, v0, v1):
         if sequence.bits[i] == 0:  # si le bit vaut 0,
             y.append(v0 if j < echantillonnage.fech / sequence.debit * (i + 0.5) else v1)  # représente un front montant à la moitié de la durée du bit
         else:  # si le bit vaut 1,
-            y.append(v1 if j < echantillonnage.fech / sequence.debit * (i + 0.5) else v0) #représente un front déscendant à la moitié de la durée du bit
+            y.append(v1 if j < echantillonnage.fech / sequence.debit * (
+                    i + 0.5) else v0)  # représente un front déscendant à la moitié de la durée du bit
 
         if j >= echantillonnage.fech / sequence.debit * (i + 1):  # test pour changer de bit
             i += 1  # on passe au bit suivant
@@ -77,13 +90,14 @@ def coder_2b1q(sequence, echantillonnage, v):
     i = 0  # on commence au bit 0
     for j in range(len(echantillonnage.vec)):  # pour chaque échantillon
         # On attribue la valeur correspondante de v à chaque dibit
-        if sequence.bits[i] == 0 and sequence.bits[i+1] == 0:  # Dibit 00
+        valeur_dibit = binaire_vers_decimal(sequence.bits[i:i + 2])
+        if valeur_dibit == 0:  # Dibit 00
             y.append(-v)
-        elif sequence.bits[i] == 0 and sequence.bits[i + 1] == 1:  # Dibit 01
+        elif valeur_dibit == 1:  # Dibit 01
             y.append(-v+(2.*v/3))
-        elif sequence.bits[i] == 1 and sequence.bits[i + 1] == 0:  # Dibit 10
+        elif valeur_dibit == 2:  # Dibit 10
             y.append(v-(2.*v/3))
-        elif sequence.bits[i] == 1 and sequence.bits[i + 1] == 1:  # Dibit 11
+        elif valeur_dibit == 3:  # Dibit 11
             y.append(v)
         if j >= echantillonnage.fech / sequence.debit * (i + 2):  # test pour changer de bit
             i += 2  # on passe aux deux bits suivant
