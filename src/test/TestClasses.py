@@ -29,5 +29,3 @@ plt.xlabel("Temps (s)")  # légende abscisses
 plt.ylabel("Tension (V)")  # légende ordonnées
 plt.legend([p], [CODAGES[type_codage]])  # nom de la série de données
 plt.show()  # affichage
-
-

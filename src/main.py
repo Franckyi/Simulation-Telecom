@@ -140,7 +140,7 @@ def creer_sequence():
     if val == 1:
         print u"Choisir le nombre de bits que contient la séquence : [default=8]"
         nb_bits = entree_entier_positif(8)
-        print u"Choisir le débit du signal (en Hertz) : [default=1000.0]"
+        print u"Choisir le débit du signal (en bit/s) : [default=1000.0]"
         debit = entree_nombre_positif(1000.)
         s = sequence.sequence_aleatoire(nb_bits, debit)
         print u"Séquence générée : " + s.__str__()
@@ -148,7 +148,7 @@ def creer_sequence():
     elif val == 2:
         print u"Entrer la séquence donnée :"
         bits = entree(prompt="{0,1}.?", verif=verif_chaine_binaire)
-        print u"Choisir le débit du signal (en Hertz) : [default=1000.0]"
+        print u"Choisir le débit du signal (en bit/s) : [default=1000.0]"
         debit = entree_nombre_positif(1000.)
         return sequence.sequence_chaine(bits, debit)
     else:
@@ -219,29 +219,29 @@ def _codage(seq, ech):
 
 
 def ask(seq, ordre):
-    print u"Choisir une fréquence porteuse : [default=1000.0]"
+    print u"Choisir une fréquence porteuse (Hz) : [default=1000.0]"
     fp = entree_nombre_positif(1000.)
     args = []
     for i in range(ordre):
-        print u"Choisir une amplitude ({}/{}) :".format(i+1, ordre)
+        print u"Choisir une amplitude (V) ({}/{}) :".format(i+1, ordre)
         args.append(entree_nombre_positif(None))
     return modulation.moduler_ask(seq, fp, args)
 
 
 def fsk(seq, ordre):
-    print u"Choisir une amplitude : [default=1.0]"
+    print u"Choisir une amplitude (V) : [default=1.0]"
     v = entree_nombre_positif(1.)
     args = []
     for i in range(ordre):
-        print u"Choisir une fréquence ({}/{}) :".format(i+1, ordre)
+        print u"Choisir une fréquence (Hz) ({}/{}) :".format(i+1, ordre)
         args.append(entree_nombre_positif(None))
     return modulation.moduler_fsk(seq, v, args)
 
 
 def psk(seq, ordre):
-    print u"Choisir une fréquence porteuse : [default=1000.0]"
+    print u"Choisir une fréquence porteuse (Hz): [default=1000.0]"
     fp = entree_nombre_positif(1000.)
-    print u"Choisir une amplitude : [default=1.0]"
+    print u"Choisir une amplitude (V): [default=1.0]"
     v = entree_nombre_positif(1.)
     args = []
     for i in range(ordre):
@@ -289,10 +289,10 @@ def actions(seq):
         print
         print u"Étape 3 : Codage"
         print u"Quel codage voulez-vous utiliser ?"
-        print u"1) NRZ"
-        print u"2) RZ"
+        print u"1) NRZ (Non-Return to Zero)"
+        print u"2) RZ (Return to Zero)"
         print u"3) Manchester"
-        print u"4) 2B1Q"
+        print u"4) 2B1Q (2 Binary 1 Quaterary)"
         _codage(seq, ech)
     elif a == 2:
         print
@@ -300,9 +300,9 @@ def actions(seq):
         print
         print u"Étape 3 : Modulation"
         print u"Quelle modulation voulez-vous utiliser ?"
-        print u"1) ASK"
-        print u"2) FSK"
-        print u"3) PSK"
+        print u"1) ASK (Modulation d'amplitude)"
+        print u"2) FSK (Modulation de fréquence)"
+        print u"3) PSK (Modulation de phase)"
         _modulation(seq)
     else:
         print "Choix incorrect !"
