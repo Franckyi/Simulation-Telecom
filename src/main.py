@@ -16,7 +16,7 @@ def verif_non_nul(s):
 def verif_nombre(s):
     try:
         float(s)
-        return True
+        return verif_non_nul(s)
     except ValueError:
         return False
 
@@ -24,7 +24,7 @@ def verif_nombre(s):
 def verif_entier(s):
     try:
         int(s)
-        return True
+        return verif_non_nul(s)
     except ValueError:
         return False
 
@@ -66,7 +66,10 @@ def format_int(s):
 
 
 def format_float(s):
-    return float(s)
+    try:
+        return float(s)
+    except ValueError:
+        return float(int(s))
 
 
 def entree(prompt="string? ", default=None, verif=verif_non_nul, format=format_string, args=None):
@@ -74,7 +77,7 @@ def entree(prompt="string? ", default=None, verif=verif_non_nul, format=format_s
     if s in ["quit", "exit"]:
         print "Au revoir !"
         quit(0)
-    if s == "":
+    if s == "" and default is not None:
         return default
     try:
         if verif(s):
