@@ -223,27 +223,31 @@ def ask(seq, ordre):
     fp = entree_nombre_positif(1000.)
     args = []
     for i in range(ordre):
-        print u"Choisir une amplitude ({}/{}) :".format(i, ordre)
+        print u"Choisir une amplitude ({}/{}) :".format(i+1, ordre)
         args.append(entree_nombre_positif(None))
     return modulation.moduler_ask(seq, fp, args)
 
 
 def fsk(seq, ordre):
+    print u"Choisir une amplitude : [default=1.0]"
+    v = entree_nombre_positif(1.)
     args = []
     for i in range(ordre):
-        print u"Choisir une fréquence ({}/{}) :".format(i, ordre)
+        print u"Choisir une fréquence ({}/{}) :".format(i+1, ordre)
         args.append(entree_nombre_positif(None))
-    return modulation.moduler_fsk(seq, args)
+    return modulation.moduler_fsk(seq, v, args)
 
 
 def psk(seq, ordre):
     print u"Choisir une fréquence porteuse : [default=1000.0]"
     fp = entree_nombre_positif(1000.)
+    print u"Choisir une amplitude : [default=1.0]"
+    v = entree_nombre_positif(1.)
     args = []
     for i in range(ordre):
-        print u"Choisir une phase (automatiquement multiplié par PI) ({}/{}) :".format(i, ordre)
+        print u"Choisir une phase (automatiquement multiplié par PI) ({}/{}) :".format(i+1, ordre)
         args.append(entree(prompt="float? ", verif=verif_nombre, format=format_float) * np.pi)
-    return modulation.moduler_psk(seq, fp, args)
+    return modulation.moduler_psk(seq, v, fp, args)
 
 
 def _modulation(seq):

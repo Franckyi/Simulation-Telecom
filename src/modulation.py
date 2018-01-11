@@ -52,10 +52,11 @@ def moduler_ask(sequence, fp, args):
     return ech.vec, y
 
 
-def moduler_fsk(sequence, args):
+def moduler_fsk(sequence, v, args):
     """
     Module une séquence binaire en fréquence
     :param sequence: La séquence à moduler
+    :param v: L'amplitude
     :param args: Les différentes fréquences
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en fréquence
     """
@@ -68,16 +69,17 @@ def moduler_fsk(sequence, args):
         frequence = args[
             binaire_vers_decimal(
                 sequence.bits[i:i + bits_symbole])]  # on récupère la fréquence correspondant au symbole
-        y.append(np.sin(2 * np.pi * ech.vec[j] * frequence))  # on l'ajoute
+        y.append(np.sin(2 * np.pi * ech.vec[j] * frequence) * v)  # on l'ajoute
         if j >= ech.fech / sequence.debit * (i + bits_symbole):  # test pour changer de symbole
             i += bits_symbole  # on passe au symbole suivant
     return ech.vec, y
 
 
-def moduler_psk(sequence, fp, args):
+def moduler_psk(sequence, v, fp, args):
     """
     Module une séquence binaire en phase
     :param sequence: La séquence à moduler
+    :param v: L'amplitude
     :param fp: La fréquence porteuse
     :param args: Les différentes phases
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en phase
@@ -90,7 +92,7 @@ def moduler_psk(sequence, fp, args):
     for j in range(len(ech.vec)):  # pour chaque échantillon
         phase = args[
             binaire_vers_decimal(sequence.bits[i:i + bits_symbole])]  # on récupère la phase correspondant au symbole
-        y.append(np.sin((2 * np.pi * fp * ech.vec[j]) + phase))  # on l'ajoute
+        y.append(np.sin((2 * np.pi * fp * ech.vec[j]) + phase) * v)  # on l'ajoute
         if j >= ech.fech / sequence.debit * (i + bits_symbole):  # test pour changer de symbole
             i += bits_symbole  # on passe au symbole suivant
     return ech.vec, y
