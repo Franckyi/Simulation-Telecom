@@ -156,9 +156,9 @@ def creer_sequence():
         return creer_sequence()
 
 
-def afficher(x, y, legende, titre):
+def afficher(seq, x, y, legende, titre):
     p, = plt.plot(x, y)  # création du graphique
-    plt.title(titre)  # titre du graphique
+    plt.title(titre + " : " + seq.__str__())  # titre du graphique
     plt.xlabel("Temps (s)")  # légende abscisses
     plt.ylabel("Tension (V)")  # légende ordonnées
     plt.legend([p], [legende])  # nom de la série de données
@@ -215,7 +215,7 @@ def _codage(seq, ech):
         print "Choix incorrect !"
         _codage(seq, ech)
         return
-    afficher(ech.vec, y, nom, u"Signal échantillonné codé {}".format(nom))
+    afficher(seq, ech.vec, y, nom, u"Signal échantillonné codé {}".format(nom))
 
 
 def ask(seq, ordre):
@@ -266,7 +266,7 @@ def _modulation(seq):
         else:
             x, y = psk(seq, ordre)
             nom = "PSK"
-        afficher(x, y, nom, u"Signal échantillonné modulé {}".format(nom))
+        afficher(seq, x, y, nom, u"Signal échantillonné modulé {}".format(nom))
     else:
         print "Choix incorrect !"
         _modulation(seq)
