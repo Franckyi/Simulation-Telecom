@@ -86,7 +86,7 @@ def entree(prompt="string? ", default=None, verif=verif_non_nul, format=format_s
         if verif(s, args):
             return format(s)
     print "Choix incorrect !"
-    return entree(prompt, default, verif, args)
+    return entree(prompt, default, verif, format, args)
 
 
 def entree_entier_positif(default):
@@ -223,7 +223,7 @@ def ask(seq, ordre):
     fp = entree_nombre_positif(1000.)
     args = []
     for i in range(ordre):
-        print u"Choisir une amplitude :"
+        print u"Choisir une amplitude ({}/{}) :".format(i, ordre)
         args.append(entree_nombre_positif(None))
     return modulation.moduler_ask(seq, fp, args)
 
@@ -231,7 +231,7 @@ def ask(seq, ordre):
 def fsk(seq, ordre):
     args = []
     for i in range(ordre):
-        print u"Choisir une fréquence :"
+        print u"Choisir une fréquence ({}/{}) :".format(i, ordre)
         args.append(entree_nombre_positif(None))
     return modulation.moduler_fsk(seq, args)
 
@@ -241,7 +241,7 @@ def psk(seq, ordre):
     fp = entree_nombre_positif(1000.)
     args = []
     for i in range(ordre):
-        print u"Choisir une phase (automatiquement multiplié par PI) :"
+        print u"Choisir une phase (automatiquement multiplié par PI) ({}/{}) :".format(i, ordre)
         args.append(entree(prompt="float? ", verif=verif_nombre, format=format_float) * np.pi)
     return modulation.moduler_psk(seq, fp, args)
 
