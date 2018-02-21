@@ -3,8 +3,6 @@
 
 import numpy as np
 
-import echantillonnage
-
 
 def binaire_vers_decimal(bits):
     """
@@ -30,17 +28,17 @@ def verifier_parametres(n_args):
     return int(bits_symbole)
 
 
-def moduler_ask(seq, db, fp, args):
+def moduler_ask(seq, db, ech, fech, fp, args):
     """
     Module une séquence binaire en amplitude
     :param seq: La séquence à moduler
     :param db: Le débit binaire
+    :param ech: L'échantillonnage
+    :param fech: La fréquence d'échantillonnage
     :param fp La fréquence porteuse
     :param args: Les différentes tensions
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en amplitude
     """
-    fech = fp * 100
-    ech = echantillonnage.creer_echantillons(seq, db, fech)  # on échantillonne à 100 * fp
     bits_symbole = verifier_parametres(
         len(args))  # on vérifie les paramètres et on récupère le nombre de bits par symbole
     y = []
@@ -51,20 +49,20 @@ def moduler_ask(seq, db, fp, args):
         y.append(np.sin(2 * np.pi * fp * ech[j]) * tension)  # on l'ajoute
         if j >= fech / db * (i + bits_symbole):  # test pour changer de symbole
             i += bits_symbole  # on passe au symbole suivant
-    return ech, y
+    return y
 
 
-def moduler_fsk(seq, db, v, args):
+def moduler_fsk(seq, db, ech, fech, v, args):
     """
     Module une séquence binaire en fréquence
     :param seq: La séquence à moduler
     :param db: Le débit binaire
+    :param ech: L'échantillonnage
+    :param fech: La fréquence d'échantillonnage
     :param v: L'amplitude
     :param args: Les différentes fréquences
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en fréquence
     """
-    fech = max(args) * 100
-    ech = echantillonnage.creer_echantillons(seq, db, fech)  # on échantillonne à 100 * fmax
     bits_symbole = verifier_parametres(
         len(args))  # on vérifie les paramètres et on récupère le nombre de bits par symbole
     y = []
@@ -76,21 +74,21 @@ def moduler_fsk(seq, db, v, args):
         y.append(np.sin(2 * np.pi * ech[j] * frequence) * v)  # on l'ajoute
         if j >= fech / db * (i + bits_symbole):  # test pour changer de symbole
             i += bits_symbole  # on passe au symbole suivant
-    return ech, y
+    return y
 
 
-def moduler_psk(seq, db, v, fp, args):
+def moduler_psk(seq, db, ech, fech, v, fp, args):
     """
     Module une séquence binaire en phase
     :param seq: La séquence à moduler
     :param db: Le débit binaire
+    :param ech: L'échantillonnage
+    :param fech: La fréquence d'échantillonnage
     :param v: L'amplitude
     :param fp: La fréquence porteuse
     :param args: Les différentes phases
     :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en phase
     """
-    fech = fp * 100
-    ech = echantillonnage.creer_echantillons(seq, db, fech)  # on échantillonne à 100 * fp
     bits_symbole = verifier_parametres(
         len(args))  # on vérifie les paramètres et on récupère le nombre de bits par symbole
     y = []
@@ -101,4 +99,4 @@ def moduler_psk(seq, db, v, fp, args):
         y.append(np.sin((2 * np.pi * fp * ech[j]) + phase) * v)  # on l'ajoute
         if j >= fech / db * (i + bits_symbole):  # test pour changer de symbole
             i += bits_symbole  # on passe au symbole suivant
-    return ech, y
+    return y

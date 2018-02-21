@@ -176,9 +176,11 @@ def nrz(seq, db, ech, fech):
 
 def rz(seq, db, ech, fech):
     print
-    print u"Choisir la tension V : [default=1.0]"
-    v = entree_nombre_positif(1.)
-    return codage.coder_rz(seq, db, ech, fech, v)
+    print u"Choisir la tension V0 : [default=-1.0]"
+    v0 = entree_nombre_positif(-1.)
+    print u"Choisir la tension V1 : [default=1.0]"
+    v1 = entree_nombre_positif(1.)
+    return codage.coder_rz(seq, db, ech, fech, v0, v1)
 
 
 def manchester(seq, db, ech, fech):
@@ -194,7 +196,7 @@ def _2b1q(seq, db, ech, fech):
     print
     print u"Choisir la tension V : [default=1.0]"
     v = entree_nombre_positif(1.)
-    return codage.coder_2b1q(seq, db, ech, fech, v)
+    return codage.coder_2b1q_max(seq, db, ech, fech, v)
 
 
 def _codage(seq, db, ech, fech):

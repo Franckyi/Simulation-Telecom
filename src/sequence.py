@@ -49,14 +49,14 @@ def sequence_chaine(chaine):
     return verifier_liste(transformer_chaine(chaine))
 
 
-def sequence_aleatoire(nb_bits):
+def sequence_aleatoire(n):
     """
     Créé une séquence aléatoire
 
-    :param nb_bits: La taille de la séquence
+    :param n: La taille de la séquence
     :return: La séquence
     """
-    return liste_aleatoire(nb_bits)
+    return liste_aleatoire(n)
 
 
 def sequence_pseudo_aleatoire(n, m):
