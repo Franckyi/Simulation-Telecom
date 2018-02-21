@@ -141,16 +141,16 @@ def creer_sequence():
         print u"Choisir le nombre de bits que contient la séquence : [default=8]"
         nb_bits = entree_entier_positif(8)
         print u"Choisir le débit du signal (en bit/s) : [default=1000.0]"
-        debit = entree_nombre_positif(1000.)
-        s = sequence.sequence_aleatoire(nb_bits, debit)
-        print u"Séquence générée : " + s.__str__()
-        return s
+        db = entree_nombre_positif(1000.)
+        seq = sequence.sequence_aleatoire(nb_bits)
+        print u"Séquence générée : " + seq.__str__()
+        return seq, db
     elif val == 2:
         print u"Entrer la séquence donnée :"
         bits = entree(prompt="{0,1}.?", verif=verif_chaine_binaire)
         print u"Choisir le débit du signal (en bit/s) : [default=1000.0]"
-        debit = entree_nombre_positif(1000.)
-        return sequence.sequence_chaine(bits, debit)
+        db = entree_nombre_positif(1000.)
+        return sequence.sequence_chaine(bits), db
     else:
         print "Choix incorrect !"
         return creer_sequence()
@@ -165,80 +165,80 @@ def afficher(seq, x, y, legende, titre):
     plt.show()  # affichage
 
 
-def nrz(seq, ech):
+def nrz(seq, db, ech, fech):
     print
     print u"Choisir la tension V0 : [default=0.0]"
     v0 = entree_nombre_positif(0.)
     print u"Choisir la tension V1 : [default=1.0]"
     v1 = entree_nombre_positif(1.)
-    return codage.coder_nrz(seq, ech, v0, v1)
+    return codage.coder_nrz(seq, db, ech, fech, v0, v1)
 
 
-def rz(seq, ech):
+def rz(seq, db, ech, fech):
     print
     print u"Choisir la tension V : [default=1.0]"
     v = entree_nombre_positif(1.)
-    return codage.coder_rz(seq, ech, v)
+    return codage.coder_rz(seq, db, ech, fech, v)
 
 
-def manchester(seq, ech):
+def manchester(seq, db, ech, fech):
     print
     print u"Choisir la tension V+ : [default=1.0]"
     v0 = entree_nombre_positif(1.)
     print u"Choisir la tension V- : [default=-1.0]"
     v1 = entree_nombre_positif(-1.)
-    return codage.coder_manchester(seq, ech, v0, v1)
+    return codage.coder_manchester(seq, db, ech, fech, v0, v1)
 
 
-def _2b1q(seq, ech):
+def _2b1q(seq, db, ech, fech):
     print
     print u"Choisir la tension V : [default=1.0]"
     v = entree_nombre_positif(1.)
-    return codage.coder_2b1q(seq, ech, v)
+    return codage.coder_2b1q(seq, db, ech, fech, v)
 
 
-def _codage(seq, ech):
+def _codage(seq, db, ech, fech):
     c = entree_choix(4)
     if c == 1:
-        y = nrz(seq, ech)
+        y = nrz(seq, db, ech, fech)
         nom = "NRZ"
     elif c == 2:
-        y = rz(seq, ech)
+        y = rz(seq, db, ech, fech)
         nom = "RZ"
     elif c == 3:
-        y = manchester(seq, ech)
+        y = manchester(seq, db, ech, fech)
         nom = "Manchester"
     elif c == 4:
-        y = _2b1q(seq, ech)
+        y = _2b1q(seq, db, ech, fech)
         nom = "2B1Q"
     else:
         print "Choix incorrect !"
-        _codage(seq, ech)
+        _codage(seq, db, ech, fech)
         return
-    afficher(seq, ech.vec, y, nom, u"Signal échantillonné codé {}".format(nom))
+    afficher(seq, ech, y, nom, u"Signal échantillonné codé {}".format(nom))
 
 
-def ask(seq, ordre):
+def ask(seq, db, ordre):
     print u"Choisir une fréquence porteuse (Hz) : [default=1000.0]"
     fp = entree_nombre_positif(1000.)
     args = []
     for i in range(ordre):
         print u"Choisir une amplitude (V) ({}/{}) :".format(i+1, ordre)
         args.append(entree_nombre_positif(None))
-    return modulation.moduler_ask(seq, fp, args)
+    return modulation.moduler_ask(seq, db, fp, args)
 
 
-def fsk(seq, ordre):
+def fsk(seq, db, ordre):
     print u"Choisir une amplitude (V) : [default=1.0]"
     v = entree_nombre_positif(1.)
     args = []
     for i in range(ordre):
         print u"Choisir une fréquence (Hz) ({}/{}) :".format(i+1, ordre)
         args.append(entree_nombre_positif(None))
-    return modulation.moduler_fsk(seq, v, args)
+    return modulation.moduler_fsk(seq, db, v, args)
 
 
-def psk(seq, ordre):
+def psk(seq, db, ordre):
     print u"Choisir une fréquence porteuse (Hz): [default=1000.0]"
     fp = entree_nombre_positif(1000.)
     print u"Choisir une amplitude (V): [default=1.0]"
@@ -247,10 +247,10 @@ def psk(seq, ordre):
     for i in range(ordre):
         print u"Choisir une phase (automatiquement multiplié par PI) ({}/{}) :".format(i+1, ordre)
         args.append(entree(prompt="float? ", verif=verif_nombre, format=format_float) * np.pi)
-    return modulation.moduler_psk(seq, v, fp, args)
+    return modulation.moduler_psk(seq, db, v, fp, args)
 
 
-def _modulation(seq):
+def _modulation(seq, db):
     m = entree_choix(3)
     if m in range(1, 4):
         print u"Choisir l'ordre de la modulation : [default=2]"
@@ -259,31 +259,31 @@ def _modulation(seq):
             modulation.verifier_parametres(ordre)
         except Exception as e:
             print e.message
-            _modulation(seq)
+            _modulation(seq, db)
             return
         if m == 1:
-            x, y = ask(seq, ordre)
+            x, y = ask(seq, db, ordre)
             nom = "ASK"
         elif m == 2:
-            x, y = fsk(seq, ordre)
+            x, y = fsk(seq, db, ordre)
             nom = "FSK"
         else:
-            x, y = psk(seq, ordre)
+            x, y = psk(seq, db, ordre)
             nom = "PSK"
         afficher(seq, x, y, nom, u"Signal échantillonné modulé {}".format(nom))
     else:
         print "Choix incorrect !"
-        _modulation(seq)
+        _modulation(seq, db)
         return
 
 
-def actions(seq):
+def actions(seq, db):
     a = entree_choix(2)
     if a == 1:
         print
         print u"Avant de coder, veuillez choisir une fréquence d'échantillonnage : [default=20000.0]"
         fech = entree_nombre_positif(20000.)
-        ech = echantillonnage.creer_echantillons(seq, fech)
+        ech = echantillonnage.creer_echantillons(seq, db, fech)
         print
         print "------"
         print
@@ -293,7 +293,7 @@ def actions(seq):
         print u"2) RZ (Return to Zero)"
         print u"3) Manchester"
         print u"4) 2B1Q (2 Binary 1 Quaterary)"
-        _codage(seq, ech)
+        _codage(seq, db, ech, fech)
     elif a == 2:
         print
         print "------"
@@ -303,10 +303,10 @@ def actions(seq):
         print u"1) ASK (Modulation d'amplitude)"
         print u"2) FSK (Modulation de fréquence)"
         print u"3) PSK (Modulation de phase)"
-        _modulation(seq)
+        _modulation(seq, db)
     else:
         print "Choix incorrect !"
-        return actions(seq)
+        return actions(seq, db)
 
 
 main()
@@ -322,7 +322,7 @@ print u"Étape 1 : Création de la séquence"
 print u"Voulez vous générer une séquence aléatoire ou utiliser une séquence donnée ?"
 print u"1) Générer une séquence aléatoire"
 print u"2) Utiliser une séquence donnée"
-_seq = creer_sequence()
+_seq, _db = creer_sequence()
 print
 print "------"
 print
@@ -330,4 +330,4 @@ print u"Étape 2 : Actions"
 print u"Que voulez-vous faire avec cette séquence ?"
 print u"1) Coder la séquence"
 print u"2) Moduler la séquence"
-actions(_seq)
+actions(_seq, _db)

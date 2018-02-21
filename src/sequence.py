@@ -3,28 +3,6 @@
 import numpy.random as random
 
 
-class Sequence:
-    """
-    Contient les informations à propos de la séquence (attribut 'bits') et de son débit binaire (attribut 'debit').
-    """
-
-    def __init__(self, bits, debit):
-        """
-        Construit un objet séquence
-
-        :param bits: Une liste de nombres ; si elle contient un nombre autre que 0 ou 1, une Exception est levée
-        :param debit: Le débit binaire de la séquence (en bit/s)
-        """
-        self.bits = verifier_liste(bits)
-        self.debit = debit
-
-    def __str__(self):
-        chaine = ""
-        for bit in self.bits:
-            chaine += str(bit)
-        return chaine
-
-
 def liste_aleatoire(n):
     """
     Génère une liste aléatoire de n bits
@@ -61,39 +39,36 @@ def verifier_liste(liste):
     return liste
 
 
-def sequence_chaine(chaine, debit=1000):
+def sequence_chaine(chaine):
     """
     Créé une séquence à partir d'une chaîne de caractères
 
     :param chaine: La chaîne de caractères
-    :param debit: Le débit binaire de la séquence
     :return: La séquence
     """
-    return Sequence(verifier_liste(transformer_chaine(chaine)), debit)
+    return verifier_liste(transformer_chaine(chaine))
 
 
-def sequence_aleatoire(nb_bits=8, debit=1000):
+def sequence_aleatoire(nb_bits):
     """
     Créé une séquence aléatoire
 
     :param nb_bits: La taille de la séquence
-    :param debit: Le débit binaire de la séquence
     :return: La séquence
     """
-    return Sequence(liste_aleatoire(nb_bits), debit)
+    return liste_aleatoire(nb_bits)
 
 
-def sequence_pseudo_aleatoire(n, m, debit):
+def sequence_pseudo_aleatoire(n, m):
     """
     Créé une séquence pseudo aléatoire
 
     :param n: La taille de la sous-séquence
     :param m: Le nombre de fois que la sous-séquence est répétée
-    :param debit: Le débit binaire de la séquence
     :return: La séquence
     """
     bits = []
     bn = liste_aleatoire(n)
     for i in range(m):
         bits.extend(bn)
-    return Sequence(bits, debit)
+    return bits
