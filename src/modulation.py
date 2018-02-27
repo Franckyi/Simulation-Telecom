@@ -119,8 +119,8 @@ def moduler_maq(seq, db, ech, fech, fp, args):
     S = []
     i = 0
     for j in range(len(ech)):  # pour chaque échantillon
-        tensionI = args[binaire_vers_decimal(seq[i:i + bits_symbole/2])] # on récupère la tension correspondant au symbole
-        tensionQ = args[binaire_vers_decimal(seq[i+ bits_symbole / 2 :i + bits_symbole])]  # on récupère la tension correspondant au symbole
+        tensionI = args[binaire_vers_decimal(seq[i:i + bits_symbole/2])] # on récupère la tension correspondant au symbole I
+        tensionQ = args[binaire_vers_decimal(seq[i+ bits_symbole / 2 :i + bits_symbole])]  # on récupère la tension correspondant au symbole Q
         I.append(np.cos(2 * np.pi * fp * ech[j]) * tensionI)  # on l'ajoute I
         Q.append(np.sin(2 * np.pi * fp * ech[j]) * tensionQ)  # on l'ajoute Q
         if j >= fech / db * (i + bits_symbole):  # test pour changer de symbole
