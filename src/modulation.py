@@ -100,3 +100,33 @@ def moduler_psk(seq, db, ech, fech, v, fp, args):
         if j >= fech / db * (i + bits_symbole):  # test pour changer de symbole
             i += bits_symbole  # on passe au symbole suivant
     return y
+
+def moduler_maq(seq, db, ech, fech, fp, args):
+    """
+    Module une séquence binaire en amplitude
+    :param seq: La séquence à moduler
+    :param db: Le débit binaire
+    :param ech: L'échantillonnage
+    :param fech: La fréquence d'échantillonnage
+    :param fp La fréquence porteuse
+    :param args: Les différentes tensions
+    :return: Le vecteur échantillonnage ainsi que le signal échantillonné modulé en amplitude
+    """
+    bits_symbole = verifier_parametres(
+        len(args))  # on vérifie les paramètres et on récupère le nombre de bits par symbole
+    I = []
+    Q = []
+    S = []
+    i = 0
+    for j in range(len(ech)):  # pour chaque échantillon
+        tensionI = args[binaire_vers_decimal(seq[i:i + bits_symbole/2])] # on récupère la tension correspondant au symbole I
+        tensionQ = args[binaire_vers_decimal(seq[i+ bits_symbole / 2 :i + bits_symbole])]  # on récupère la tension correspondant au symbole Q
+        I.append(np.cos(2 * np.pi * fp * ech[j]) * tensionI)  # on l'ajoute I
+        Q.append(np.sin(2 * np.pi * fp * ech[j]) * tensionQ)  # on l'ajoute Q
+        if j >= fech / db * (i + bits_symbole):  # test pour changer de symbole
+            i += bits_symbole  # on passe au symbole suivant
+
+    for x in len(I):
+        S.append(I[x]+Q[x])
+
+    return S
