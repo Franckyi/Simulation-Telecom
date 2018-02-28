@@ -251,12 +251,21 @@ def psk(seq, db, ordre):
         args.append(entree(prompt="float? ", verif=verif_nombre, format=format_float) * np.pi)
     return modulation.moduler_psk(seq, db, v, fp, args)
 
+def maq(seq, db, ordre):
+    print u"Choisir une fréquence porteuse (Hz) : [default=1000.0]"
+    fp = entree_nombre_positif(1000.)
+    args = []
+    for i in range(ordre/2):
+        args.append((i + 1) * 2.)
+        args.append((i + 1) * - 2.)
+    return modulation.moduler_maq(seq, db, fp, args)
+
 
 def _modulation(seq, db):
-    m = entree_choix(3)
-    if m in range(1, 4):
+    m = entree_choix(4)
+    if m in range(1, 5):
         print u"Choisir l'ordre de la modulation : [default=2]"
-        ordre = entree_entier_positif(2)
+        ordre = entree_entier_positif(2) #trouver un façon de prendre en compte la maq (MAQ 4 / MAQ 16 etc)
         try:
             modulation.verifier_parametres(ordre)
         except Exception as e:
@@ -269,9 +278,13 @@ def _modulation(seq, db):
         elif m == 2:
             x, y = fsk(seq, db, ordre)
             nom = "FSK"
-        else:
+        elif m == 3:
             x, y = psk(seq, db, ordre)
             nom = "PSK"
+        else:
+            x,y = maq(seq,db,ordre)
+            nom = "MAQ"
+
         afficher(seq, x, y, nom, u"Signal échantillonné modulé {}".format(nom))
     else:
         print "Choix incorrect !"
@@ -305,6 +318,7 @@ def actions(seq, db):
         print u"1) ASK (Modulation d'amplitude)"
         print u"2) FSK (Modulation de fréquence)"
         print u"3) PSK (Modulation de phase)"
+        print u"4) MAQ (Modulation d'amplitude en quadrature)"
         _modulation(seq, db)
     else:
         print "Choix incorrect !"

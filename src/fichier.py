@@ -73,6 +73,9 @@ if has_modulation:
     elif data['modulation']['type'] == 'psk':
         y_modulation = modulation.moduler_psk(seq, db, ech_modulation, fech_modulation, data['modulation']['v'],
                                               data['modulation']['fp'], data['modulation']['p'])
+    elif data['modulation']['type'] == 'maq':
+        y_modulation = modulation.moduler_maq(seq, db, ech_modulation, fech_modulation, data['modulation']['v'],
+                                          data['modulation']['fp'], data['modulation']['p'])
     else:
         print "Modulation '{}' inconnue".format(data['modulation']['type'])
         exit(3)
