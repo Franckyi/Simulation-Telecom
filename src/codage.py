@@ -1,17 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
-def binaire_vers_decimal(bits):
-    """
-    Transforme un tableau de bits en entier
-    :param bits: Le tableau de bits
-    :return: L'entier représentant la valeur binaire
-    """
-    s = ""
-    for bit in bits:
-        s += str(bit)
-    return int(s, 2)
+from outils import binaire_vers_decimal
 
 
 def coder_nrz(seq, db, ech, fech, v0, v1):
