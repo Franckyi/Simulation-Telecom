@@ -7,8 +7,7 @@ import json
 import sys
 from pprint import pprint
 
-import matplotlib.pyplot as plt
-
+import affichage
 import codage
 import echantillonnage
 import modulation
@@ -27,11 +26,10 @@ if 'sequence' not in data:
     exit(2)
 if 'seq' in data['sequence']:
     seq = sequence.sequence_chaine(data['sequence']['seq'])
+elif 'repetitions' in data['sequence']:
+    seq = sequence.sequence_pseudo_aleatoire(data['sequence']['taille'], data['sequence']['repetitions'])
 else:
-    if 'repetitions' in data['sequence']:
-        seq = sequence.sequence_pseudo_aleatoire(data['sequence']['taille'], data['sequence']['repetitions'])
-    else:
-        seq = sequence.sequence_aleatoire(data['sequence']['taille'])
+    seq = sequence.sequence_aleatoire(data['sequence']['taille'])
 db = data['sequence']['db']
 aff = data['sequence']['aff']
 
@@ -82,18 +80,20 @@ if has_modulation:
 
 # Canal
 
+fig = 0
+
 if aff:
-    print seq
+    affichage.figure_sequence(seq, fig)
+    fig += 1
 
 if has_codage:
     if chronogramme_codage:
-        plt.figure(1)
-        plt.plot(ech_codage, y_codage)
+        affichage.figure_chronogramme(ech_codage, y_codage, u"Chronogramme du signal codé", fig)
+        fig += 1
 
 if has_modulation:
     if chronogramme_modulation:
-        plt.figure(2)
-        plt.plot(ech_modulation, y_modulation)
+        affichage.figure_chronogramme(ech_modulation, y_modulation, u"Chronogramme de la porteuse modulée", fig)
+        fig += 1
 
-plt.grid(True)
-plt.show()
+affichage.afficher()
