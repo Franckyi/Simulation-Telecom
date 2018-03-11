@@ -3,7 +3,7 @@
 # Ici : Codage du bruit,
 from random import randint
 
-import affichage
+import numpy as np
 
 
 def ajout_bruit(y, mvmax, signe):
@@ -42,3 +42,12 @@ def generer_bruit(nbech, mvmax, signe):
             ybr.append(randint(0, (mvmax * 100))/100000.)
     return ybr
 
+
+def bruit_gaussien(y, intensite):
+    bruit = (np.random.normal(0, 1, len(y)) - 0.5) * intensite
+    return np.array(y) + bruit
+
+
+def bruit_aleatoire(y, intensite):
+    bruit = (np.random.rand(len(y)) - 0.5) * intensite
+    return np.array(y) + bruit
