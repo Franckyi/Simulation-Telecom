@@ -311,18 +311,24 @@ if has_codage:
     xf_codage, yf_codage = outils.calculer_spectre(ech_codage, y_codage)
     if has_bruit:
         xf_codage_bruit, yf_codage_bruit = outils.calculer_spectre(ech_codage, y_codage_bruit)
-        aff_spectre_codage_fmin = min(xf_codage_bruit) if aff_spectre_codage_fmin is None else aff_spectre_codage_fmin
-        aff_spectre_codage_fmax = max(xf_codage_bruit) if aff_spectre_codage_fmax is None else aff_spectre_codage_fmax
-        aff_spectre_codage_vmin = min(yf_codage_bruit) if aff_spectre_codage_vmin is None else aff_spectre_codage_vmin
-        aff_spectre_codage_vmax = max(yf_codage_bruit) if aff_spectre_codage_vmax is None else aff_spectre_codage_vmax
-        aff_chronogramme_codage_tmin = min(
-            ech_codage) if aff_chronogramme_codage_tmin is None else aff_chronogramme_codage_tmin
-        aff_chronogramme_codage_tmax = max(
-            ech_codage) if aff_chronogramme_codage_tmax is None else aff_chronogramme_codage_tmax
-        aff_chronogramme_codage_vmin = min(
-            y_codage_bruit) if aff_chronogramme_codage_vmin is None else aff_chronogramme_codage_vmin
-        aff_chronogramme_codage_vmax = max(
-            y_codage_bruit) if aff_chronogramme_codage_vmax is None else aff_chronogramme_codage_vmax
+        if aff_chronogramme_codage:
+            aff_chronogramme_codage_tmin = min(
+                ech_codage) if aff_chronogramme_codage_tmin is None else aff_chronogramme_codage_tmin
+            aff_chronogramme_codage_tmax = max(
+                ech_codage) if aff_chronogramme_codage_tmax is None else aff_chronogramme_codage_tmax
+            aff_chronogramme_codage_vmin = min(
+                y_codage_bruit) if aff_chronogramme_codage_vmin is None else aff_chronogramme_codage_vmin
+            aff_chronogramme_codage_vmax = max(
+                y_codage_bruit) if aff_chronogramme_codage_vmax is None else aff_chronogramme_codage_vmax
+        if aff_spectre_codage:
+            aff_spectre_codage_fmin = min(
+                xf_codage_bruit) if aff_spectre_codage_fmin is None else aff_spectre_codage_fmin
+            aff_spectre_codage_fmax = max(
+                xf_codage_bruit) if aff_spectre_codage_fmax is None else aff_spectre_codage_fmax
+            aff_spectre_codage_vmin = min(
+                yf_codage_bruit) if aff_spectre_codage_vmin is None else aff_spectre_codage_vmin
+            aff_spectre_codage_vmax = max(
+                yf_codage_bruit) if aff_spectre_codage_vmax is None else aff_spectre_codage_vmax
     y = y_codage_bruit if has_bruit else y_codage
     xf = xf_codage_bruit if has_bruit else xf_codage
     yf = yf_codage_bruit if has_bruit else yf_codage
@@ -369,22 +375,24 @@ if has_modulation:
     xf_modulation, yf_modulation = outils.calculer_spectre(ech_modulation, y_modulation)
     if has_bruit:
         xf_modulation_bruit, yf_modulation_bruit = outils.calculer_spectre(ech_modulation, y_modulation_bruit)
-        aff_spectre_modulation_fmin = min(
-            xf_modulation_bruit) if aff_spectre_modulation_fmin is None else aff_spectre_modulation_fmin
-        aff_spectre_modulation_fmax = max(
-            xf_modulation_bruit) if aff_spectre_modulation_fmax is None else aff_spectre_modulation_fmax
-        aff_spectre_modulation_vmin = min(
-            yf_modulation_bruit) if aff_spectre_modulation_vmin is None else aff_spectre_modulation_vmin
-        aff_spectre_modulation_vmax = max(
-            yf_modulation_bruit) if aff_spectre_modulation_vmax is None else aff_spectre_modulation_vmax
-        aff_chronogramme_modulation_tmin = min(
-            ech_modulation) if aff_chronogramme_modulation_tmin is None else aff_chronogramme_modulation_tmin
-        aff_chronogramme_modulation_tmax = max(
-            ech_modulation) if aff_chronogramme_modulation_tmax is None else aff_chronogramme_modulation_tmax
-        aff_chronogramme_modulation_vmin = min(
-            y_modulation_bruit) if aff_chronogramme_modulation_vmin is None else aff_chronogramme_modulation_vmin
-        aff_chronogramme_modulation_vmax = max(
-            y_modulation_bruit) if aff_chronogramme_modulation_vmax is None else aff_chronogramme_modulation_vmax
+        if aff_chronogramme_modulation:
+            aff_chronogramme_modulation_tmin = min(
+                ech_modulation) if aff_chronogramme_modulation_tmin is None else aff_chronogramme_modulation_tmin
+            aff_chronogramme_modulation_tmax = max(
+                ech_modulation) if aff_chronogramme_modulation_tmax is None else aff_chronogramme_modulation_tmax
+            aff_chronogramme_modulation_vmin = min(
+                y_modulation_bruit) if aff_chronogramme_modulation_vmin is None else aff_chronogramme_modulation_vmin
+            aff_chronogramme_modulation_vmax = max(
+                y_modulation_bruit) if aff_chronogramme_modulation_vmax is None else aff_chronogramme_modulation_vmax
+        if aff_spectre_modulation:
+            aff_spectre_modulation_fmin = min(
+                xf_modulation_bruit) if aff_spectre_modulation_fmin is None else aff_spectre_modulation_fmin
+            aff_spectre_modulation_fmax = max(
+                xf_modulation_bruit) if aff_spectre_modulation_fmax is None else aff_spectre_modulation_fmax
+            aff_spectre_modulation_vmin = min(
+                yf_modulation_bruit) if aff_spectre_modulation_vmin is None else aff_spectre_modulation_vmin
+            aff_spectre_modulation_vmax = max(
+                yf_modulation_bruit) if aff_spectre_modulation_vmax is None else aff_spectre_modulation_vmax
     y = y_modulation_bruit if has_bruit else y_modulation
     xf = xf_modulation_bruit if has_bruit else xf_modulation
     yf = yf_modulation_bruit if has_bruit else yf_modulation
