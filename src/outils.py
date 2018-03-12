@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import numpy as np
+
 
 def binaire_vers_decimal(bits):
     """
@@ -34,3 +36,18 @@ def chaine_binaire(bits):
     for bit in bits:
         s += str(bit)
     return s
+
+
+def calculer_spectre(x, y):
+    """
+    Calcule la densité spectrale de puissance d'un signal
+    :param x: L'échantillonnage
+    :param y: Les tensions
+    :return: Les fréquences, les puissances associées aux fréquences
+    """
+    t = x[1] - x[0]
+    yf = np.abs(np.fft.fft(y)) ** 2 / t
+    n = len(yf)
+    yf = yf[0:n / 2]
+    xf = np.linspace(0, 1 / (2 * t), n / 2)
+    return xf, yf

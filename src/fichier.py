@@ -90,7 +90,7 @@ if has_codage:
     if aff_chronogramme_codage:
         aff_chronogramme_codagej = aff_codage['chronogramme']
         aff_chronogramme_codage_tmin = aff_chronogramme_codagej['tmin'] if 'tmin' in aff_chronogramme_codagej else None
-        aff_chronogramme_codage_tmax = aff_chronogramme_codagej['tmin'] if 'tmin' in aff_chronogramme_codagej else None
+        aff_chronogramme_codage_tmax = aff_chronogramme_codagej['tmax'] if 'tmax' in aff_chronogramme_codagej else None
         aff_chronogramme_codage_vmin = aff_chronogramme_codagej['vmin'] if 'vmin' in aff_chronogramme_codagej else None
         aff_chronogramme_codage_vmax = aff_chronogramme_codagej['vmax'] if 'vmax' in aff_chronogramme_codagej else None
         aff_chronogramme_codage_xlegend = aff_chronogramme_codagej[
@@ -102,8 +102,8 @@ if has_codage:
     aff_spectre_codage = 'spectre' in aff_codage
     if aff_spectre_codage:
         aff_spectre_codagej = aff_codage['spectre']
-        aff_spectre_codage_tmin = aff_spectre_codagej['tmin'] if 'tmin' in aff_spectre_codagej else None
-        aff_spectre_codage_tmax = aff_spectre_codagej['tmin'] if 'tmin' in aff_spectre_codagej else None
+        aff_spectre_codage_fmin = aff_spectre_codagej['fmin'] if 'fmin' in aff_spectre_codagej else None
+        aff_spectre_codage_fmax = aff_spectre_codagej['fmax'] if 'fmax' in aff_spectre_codagej else None
         aff_spectre_codage_vmin = aff_spectre_codagej['vmin'] if 'vmin' in aff_spectre_codagej else None
         aff_spectre_codage_vmax = aff_spectre_codagej['vmax'] if 'vmax' in aff_spectre_codagej else None
         aff_spectre_codage_xlegend = aff_spectre_codagej['xlegend'] if 'xlegend' in aff_spectre_codagej else None
@@ -129,7 +129,7 @@ if has_codage:
         aff_chronogramme_codage_canal_tmin = aff_chronogramme_codage_canalj[
             'tmin'] if 'tmin' in aff_chronogramme_codage_canalj else None
         aff_chronogramme_codage_canal_tmax = aff_chronogramme_codage_canalj[
-            'tmin'] if 'tmin' in aff_chronogramme_codage_canalj else None
+            'tmax'] if 'tmax' in aff_chronogramme_codage_canalj else None
         aff_chronogramme_codage_canal_vmin = aff_chronogramme_codage_canalj[
             'vmin'] if 'vmin' in aff_chronogramme_codage_canalj else None
         aff_chronogramme_codage_canal_vmax = aff_chronogramme_codage_canalj[
@@ -143,10 +143,10 @@ if has_codage:
     aff_spectre_codage_canal = 'spectre' in aff_codage_canal
     if aff_spectre_codage_canal:
         aff_spectre_codage_canalj = aff_codage_canal['spectre']
-        aff_spectre_codage_canal_tmin = aff_spectre_codage_canalj[
-            'tmin'] if 'tmin' in aff_spectre_codage_canalj else None
-        aff_spectre_codage_canal_tmax = aff_spectre_codage_canalj[
-            'tmin'] if 'tmin' in aff_spectre_codage_canalj else None
+        aff_spectre_codage_canal_fmin = aff_spectre_codage_canalj[
+            'fmin'] if 'fmin' in aff_spectre_codage_canalj else None
+        aff_spectre_codage_canal_fmax = aff_spectre_codage_canalj[
+            'fmax'] if 'fmax' in aff_spectre_codage_canalj else None
         aff_spectre_codage_canal_vmin = aff_spectre_codage_canalj[
             'vmin'] if 'vmin' in aff_spectre_codage_canalj else None
         aff_spectre_codage_canal_vmax = aff_spectre_codage_canalj[
@@ -199,7 +199,7 @@ if has_modulation:
         aff_chronogramme_modulation_tmin = aff_chronogramme_modulationj[
             'tmin'] if 'tmin' in aff_chronogramme_modulationj else None
         aff_chronogramme_modulation_tmax = aff_chronogramme_modulationj[
-            'tmin'] if 'tmin' in aff_chronogramme_modulationj else None
+            'tmax'] if 'tmax' in aff_chronogramme_modulationj else None
         aff_chronogramme_modulation_vmin = aff_chronogramme_modulationj[
             'vmin'] if 'vmin' in aff_chronogramme_modulationj else None
         aff_chronogramme_modulation_vmax = aff_chronogramme_modulationj[
@@ -213,8 +213,8 @@ if has_modulation:
     aff_spectre_modulation = 'spectre' in aff_modulation
     if aff_spectre_modulation:
         aff_spectre_modulationj = aff_modulation['spectre']
-        aff_spectre_modulation_tmin = aff_spectre_modulationj['tmin'] if 'tmin' in aff_spectre_modulationj else None
-        aff_spectre_modulation_tmax = aff_spectre_modulationj['tmin'] if 'tmin' in aff_spectre_modulationj else None
+        aff_spectre_modulation_fmin = aff_spectre_modulationj['fmin'] if 'fmin' in aff_spectre_modulationj else None
+        aff_spectre_modulation_fmax = aff_spectre_modulationj['fmax'] if 'fmax' in aff_spectre_modulationj else None
         aff_spectre_modulation_vmin = aff_spectre_modulationj['vmin'] if 'vmin' in aff_spectre_modulationj else None
         aff_spectre_modulation_vmax = aff_spectre_modulationj['vmax'] if 'vmax' in aff_spectre_modulationj else None
         aff_spectre_modulation_xlegend = aff_spectre_modulationj[
@@ -241,7 +241,7 @@ if has_modulation:
         aff_chronogramme_modulation_canal_tmin = aff_chronogramme_modulation_canalj[
             'tmin'] if 'tmin' in aff_chronogramme_modulation_canalj else None
         aff_chronogramme_modulation_canal_tmax = aff_chronogramme_modulation_canalj[
-            'tmin'] if 'tmin' in aff_chronogramme_modulation_canalj else None
+            'tmax'] if 'tmax' in aff_chronogramme_modulation_canalj else None
         aff_chronogramme_modulation_canal_vmin = aff_chronogramme_modulation_canalj[
             'vmin'] if 'vmin' in aff_chronogramme_modulation_canalj else None
         aff_chronogramme_modulation_canal_vmax = aff_chronogramme_modulation_canalj[
@@ -256,10 +256,10 @@ if has_modulation:
     aff_spectre_modulation_canal = 'spectre' in aff_modulation_canal
     if aff_spectre_modulation_canal:
         aff_spectre_modulation_canalj = aff_modulation_canal['spectre']
-        aff_spectre_modulation_canal_tmin = aff_spectre_modulation_canalj[
-            'tmin'] if 'tmin' in aff_spectre_modulation_canalj else None
-        aff_spectre_modulation_canal_tmax = aff_spectre_modulation_canalj[
-            'tmin'] if 'tmin' in aff_spectre_modulation_canalj else None
+        aff_spectre_modulation_canal_fmin = aff_spectre_modulation_canalj[
+            'fmin'] if 'fmin' in aff_spectre_modulation_canalj else None
+        aff_spectre_modulation_canal_fmax = aff_spectre_modulation_canalj[
+            'fmax'] if 'fmax' in aff_spectre_modulation_canalj else None
         aff_spectre_modulation_canal_vmin = aff_spectre_modulation_canalj[
             'vmin'] if 'vmin' in aff_spectre_modulation_canalj else None
         aff_spectre_modulation_canal_vmax = aff_spectre_modulation_canalj[
@@ -308,6 +308,24 @@ if aff_repartition:
     fig += 1
 
 if has_codage:
+    xf_codage, yf_codage = outils.calculer_spectre(ech_codage, y_codage)
+    if has_bruit:
+        xf_codage_bruit, yf_codage_bruit = outils.calculer_spectre(ech_codage, y_codage_bruit)
+        aff_spectre_codage_fmin = min(xf_codage_bruit) if aff_spectre_codage_fmin is None else aff_spectre_codage_fmin
+        aff_spectre_codage_fmax = max(xf_codage_bruit) if aff_spectre_codage_fmax is None else aff_spectre_codage_fmax
+        aff_spectre_codage_vmin = min(yf_codage_bruit) if aff_spectre_codage_vmin is None else aff_spectre_codage_vmin
+        aff_spectre_codage_vmax = max(yf_codage_bruit) if aff_spectre_codage_vmax is None else aff_spectre_codage_vmax
+        aff_chronogramme_codage_tmin = min(
+            ech_codage) if aff_chronogramme_codage_tmin is None else aff_chronogramme_codage_tmin
+        aff_chronogramme_codage_tmax = max(
+            ech_codage) if aff_chronogramme_codage_tmax is None else aff_chronogramme_codage_tmax
+        aff_chronogramme_codage_vmin = min(
+            y_codage_bruit) if aff_chronogramme_codage_vmin is None else aff_chronogramme_codage_vmin
+        aff_chronogramme_codage_vmax = max(
+            y_codage_bruit) if aff_chronogramme_codage_vmax is None else aff_chronogramme_codage_vmax
+    y = y_codage_bruit if has_bruit else y_codage
+    xf = xf_codage_bruit if has_bruit else xf_codage
+    yf = yf_codage_bruit if has_bruit else yf_codage
     if aff_chronogramme_codage:
         print "> Affichage du chronogramme de la séquence codée"
         affichage.figure_chronogramme(ech_codage, y_codage, fig, aff_chronogramme_codage_titre,
@@ -317,16 +335,16 @@ if has_codage:
         fig += 1
     if aff_spectre_codage:
         print "> Affichage du spectre de la séquence codée"
-        affichage.figure_spectre(ech_codage, y_codage, fig, aff_spectre_codage_titre,
+        affichage.figure_spectre(xf_codage, yf_codage, fig, aff_spectre_codage_titre,
                                  aff_spectre_codage_xlegend, aff_spectre_codage_ylegend,
-                                 aff_spectre_codage_tmin, aff_spectre_codage_tmax,
+                                 aff_spectre_codage_fmin, aff_spectre_codage_fmax,
                                  aff_spectre_codage_vmin, aff_spectre_codage_vmax)
         fig += 1
     if aff_diagramme_oeil:
         print "> Affichage du diagramme de l'oeil de la séquence codée"
-        affichage.figure_diagramme_oeil()
+        affichage.figure_diagramme_oeil(ech_codage, y_codage, fig, seq, db, aff_diagramme_oeil_n,
+                                        aff_diagramme_oeil_titre)
         fig += 1
-    y = y_codage_bruit if has_bruit else y_codage
     if aff_chronogramme_codage_canal:
         print "> Affichage du chronogramme de la séquence codée à travers le canal"
         affichage.figure_chronogramme(ech_codage, y, fig, aff_chronogramme_codage_canal_titre,
@@ -336,18 +354,40 @@ if has_codage:
         fig += 1
     if aff_spectre_codage_canal:
         print "> Affichage du spectre de la séquence codée à travers le canal"
-        affichage.figure_spectre(ech_codage, y, fig, aff_spectre_codage_canal_titre,
+        affichage.figure_spectre(xf, yf, fig, aff_spectre_codage_canal_titre,
                                  aff_spectre_codage_canal_xlegend, aff_spectre_codage_canal_ylegend,
-                                 aff_spectre_codage_canal_tmin, aff_spectre_codage_canal_tmax,
+                                 aff_spectre_codage_canal_fmin, aff_spectre_codage_canal_fmax,
                                  aff_spectre_codage_canal_vmin, aff_spectre_codage_canal_vmax)
         fig += 1
     if aff_diagramme_oeil_canal:
         print "> Affichage du diagramme de l'oeil de la séquence codée à travers le canal"
-        affichage.figure_diagramme_oeil()
+        affichage.figure_diagramme_oeil(ech_codage, y, fig, seq, db, aff_diagramme_oeil_canal_n,
+                                        aff_diagramme_oeil_canal_titre)
         fig += 1
-        
 
 if has_modulation:
+    xf_modulation, yf_modulation = outils.calculer_spectre(ech_modulation, y_modulation)
+    if has_bruit:
+        xf_modulation_bruit, yf_modulation_bruit = outils.calculer_spectre(ech_modulation, y_modulation_bruit)
+        aff_spectre_modulation_fmin = min(
+            xf_modulation_bruit) if aff_spectre_modulation_fmin is None else aff_spectre_modulation_fmin
+        aff_spectre_modulation_fmax = max(
+            xf_modulation_bruit) if aff_spectre_modulation_fmax is None else aff_spectre_modulation_fmax
+        aff_spectre_modulation_vmin = min(
+            yf_modulation_bruit) if aff_spectre_modulation_vmin is None else aff_spectre_modulation_vmin
+        aff_spectre_modulation_vmax = max(
+            yf_modulation_bruit) if aff_spectre_modulation_vmax is None else aff_spectre_modulation_vmax
+        aff_chronogramme_modulation_tmin = min(
+            ech_modulation) if aff_chronogramme_modulation_tmin is None else aff_chronogramme_modulation_tmin
+        aff_chronogramme_modulation_tmax = max(
+            ech_modulation) if aff_chronogramme_modulation_tmax is None else aff_chronogramme_modulation_tmax
+        aff_chronogramme_modulation_vmin = min(
+            y_modulation_bruit) if aff_chronogramme_modulation_vmin is None else aff_chronogramme_modulation_vmin
+        aff_chronogramme_modulation_vmax = max(
+            y_modulation_bruit) if aff_chronogramme_modulation_vmax is None else aff_chronogramme_modulation_vmax
+    y = y_modulation_bruit if has_bruit else y_modulation
+    xf = xf_modulation_bruit if has_bruit else xf_modulation
+    yf = yf_modulation_bruit if has_bruit else yf_modulation
     if aff_chronogramme_modulation:
         print "> Affichage du chronogramme de la porteuse modulée"
         affichage.figure_chronogramme(ech_modulation, y_modulation, fig, aff_chronogramme_modulation_titre,
@@ -357,16 +397,15 @@ if has_modulation:
         fig += 1
     if aff_spectre_modulation:
         print "> Affichage du spectre de la porteuse modulée"
-        affichage.figure_spectre(ech_modulation, y_modulation, fig, aff_spectre_modulation_titre,
+        affichage.figure_spectre(xf_modulation, yf_modulation, fig, aff_spectre_modulation_titre,
                                  aff_spectre_modulation_xlegend, aff_spectre_modulation_ylegend,
-                                 aff_spectre_modulation_tmin, aff_spectre_modulation_tmax,
+                                 aff_spectre_modulation_fmin, aff_spectre_modulation_fmax,
                                  aff_spectre_modulation_vmin, aff_spectre_modulation_vmax)
         fig += 1
     if aff_constellation:
         print "> Affichage de la constellation de la porteuse modulée"
         affichage.figure_constellation()
         fig += 1
-    y = y_modulation_bruit if has_bruit else y_modulation
     if aff_chronogramme_modulation_canal:
         print "> Affichage du chronogramme de la séquence codée à travers le canal"
         affichage.figure_chronogramme(ech_modulation, y, fig, aff_chronogramme_modulation_canal_titre,
@@ -377,9 +416,9 @@ if has_modulation:
         fig += 1
     if aff_spectre_modulation_canal:
         print "> Affichage du spectre de la séquence codée à travers le canal"
-        affichage.figure_spectre(ech_modulation, y, fig, aff_spectre_modulation_canal_titre,
+        affichage.figure_spectre(xf, yf, fig, aff_spectre_modulation_canal_titre,
                                  aff_spectre_modulation_canal_xlegend, aff_spectre_modulation_canal_ylegend,
-                                 aff_spectre_modulation_canal_tmin, aff_spectre_modulation_canal_tmax,
+                                 aff_spectre_modulation_canal_fmin, aff_spectre_modulation_canal_fmax,
                                  aff_spectre_modulation_canal_vmin, aff_spectre_modulation_canal_vmax)
         fig += 1
     if aff_constellation_canal:

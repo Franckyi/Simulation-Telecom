@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 import matplotlib.pyplot as plt
-import numpy as np
 
 from outils import *
 
@@ -31,19 +30,29 @@ def figure_chronogramme(x, y, fig, titre=None, xlegend=None, ylegend=None, xmin=
            max(x) if xmax is None else xmax, min(y) if ymin is None else ymin, max(y) if ymax is None else ymax)
 
 
-def figure_spectre(x, y, fig, titre=None, xlegend=None, ylegend=None, xmin=None, xmax=None, ymin=None, ymax=None):
-    t = x[1] - x[0]
-    yf = np.abs(np.fft.fft(y)) ** 2 / t
-    n = len(yf)
-    yf = yf[0:n / 2]
-    xf = np.linspace(0, 1 / (2 * t), n / 2)
+def figure_spectre(xf, yf, fig, titre=None, xlegend=None, ylegend=None, xmin=None, xmax=None, ymin=None, ymax=None):
     figure(xf, yf, fig, "Spectre" if titre is None else titre, u"Fréquence (Hz)" if xlegend is None else xlegend,
            "Puissance (W)" if ylegend is None else ylegend, min(xf) if xmin is None else xmin,
            max(xf) if xmax is None else xmax, min(yf) if ymin is None else ymin, max(yf) if ymax is None else ymax)
 
 
-def figure_diagramme_oeil():
-    pass
+def figure_diagramme_oeil(x, y, fig, seq, db, nb_yeux, titre=None):
+    window_size = (2 * nb_yeux - nb_yeux + 1) * len(x) / len(seq)
+    eyediagram_lines(fig, y, window_size, window_size / (2 * (nb_yeux + 1)), titre)
+
+
+def eyediagram_lines(fig, y, window_size, offset, titre):
+    # SOURCE : https://github.com/WarrenWeckesser/eyediagram/blob/master/eyediagram/mpl.py
+    plt.figure(fig)
+    plt.title(titre)
+    start = offset
+    while start < len(y):
+        end = start + window_size
+        if end > len(y):
+            end = len(y)
+        yy = y[start:end + 1]
+        plt.plot(np.arange(len(yy)), yy, '#1f77b4')
+        start = end
 
 
 def figure_constellation():
