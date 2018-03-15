@@ -36,23 +36,27 @@ def figure_spectre(xf, yf, fig, titre=None, xlegend=None, ylegend=None, xmin=Non
            max(xf) if xmax is None else xmax, min(yf) if ymin is None else ymin, max(yf) if ymax is None else ymax)
 
 
-def figure_diagramme_oeil(x, y, fig, seq, db, nb_yeux, titre=None):
+def figure_diagramme_oeil(x, y, fig, seq, vmin, vmax, nb_yeux, titre=None):
     window_size = (2 * nb_yeux - nb_yeux + 1) * len(x) / len(seq)
-    eyediagram_lines(fig, y, window_size, window_size / (2 * (nb_yeux + 1)), titre)
+    t = x[1] - x[0]
+    eyediagram_lines(fig, y, t, window_size, window_size / (2 * (nb_yeux + 1)), vmin, vmax, titre)
 
 
-def eyediagram_lines(fig, y, window_size, offset, titre):
+def eyediagram_lines(fig, y, t, window_size, offset, vmin, vmax, titre):
     # SOURCE : https://github.com/WarrenWeckesser/eyediagram/blob/master/eyediagram/mpl.py
     plt.figure(fig)
     plt.title(titre)
+    plt.xlabel("Temps (s)")
+    plt.ylabel("Tension (V)")
     start = offset
     while start < len(y):
         end = start + window_size
         if end > len(y):
             end = len(y)
         yy = y[start:end + 1]
-        plt.plot(np.arange(len(yy)), yy, '#1f77b4')
+        plt.plot(np.arange(len(yy)) * t, yy, '#1f77b4')
         start = end
+    plt.axis([0, window_size * t, vmin, vmax])
 
 
 def figure_constellation():

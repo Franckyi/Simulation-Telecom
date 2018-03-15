@@ -332,6 +332,8 @@ if has_codage:
     y = y_codage_bruit if has_bruit else y_codage
     xf = xf_codage_bruit if has_bruit else xf_codage
     yf = yf_codage_bruit if has_bruit else yf_codage
+    aff_diagramme_oeil_vmin = min(y_codage_bruit) if has_bruit else min(y_codage)
+    aff_diagramme_oeil_vmax = max(y_codage_bruit) if has_bruit else max(y_codage)
     if aff_chronogramme_codage:
         print "> Affichage du chronogramme de la séquence codée"
         affichage.figure_chronogramme(ech_codage, y_codage, fig, aff_chronogramme_codage_titre,
@@ -348,8 +350,8 @@ if has_codage:
         fig += 1
     if aff_diagramme_oeil:
         print "> Affichage du diagramme de l'oeil de la séquence codée"
-        affichage.figure_diagramme_oeil(ech_codage, y_codage, fig, seq, db, aff_diagramme_oeil_n,
-                                        aff_diagramme_oeil_titre)
+        affichage.figure_diagramme_oeil(ech_codage, y_codage, fig, seq, aff_diagramme_oeil_vmin,
+                                        aff_diagramme_oeil_vmax, aff_diagramme_oeil_n, aff_diagramme_oeil_titre)
         fig += 1
     if aff_chronogramme_codage_canal:
         print "> Affichage du chronogramme de la séquence codée à travers le canal"
@@ -367,8 +369,8 @@ if has_codage:
         fig += 1
     if aff_diagramme_oeil_canal:
         print "> Affichage du diagramme de l'oeil de la séquence codée à travers le canal"
-        affichage.figure_diagramme_oeil(ech_codage, y, fig, seq, db, aff_diagramme_oeil_canal_n,
-                                        aff_diagramme_oeil_canal_titre)
+        affichage.figure_diagramme_oeil(ech_codage, y, fig, seq, aff_diagramme_oeil_vmin, aff_diagramme_oeil_vmax,
+                                        aff_diagramme_oeil_canal_n, aff_diagramme_oeil_canal_titre)
         fig += 1
 
 if has_modulation:
